@@ -34,10 +34,10 @@ export const login = async ctx => {
       });
       return;
     } else {
+      console.log("no user exists: create new");
       const user = new User({
         kakaoUid, kakaoNickname, kakaoProfileImg, kakaoThumbnailImg,
       });
-      console.log(user.serialize());
       await user.save();
       const login_token = user.generateToken();
       ctx.cookies.set('login_token', login_token, {
