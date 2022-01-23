@@ -25,7 +25,7 @@ export const login = async ctx => {
     console.log(kakaoThumbnailImg);
   }).catch(error => {
     console.log(error.response);
-    return;
+    ctx.throw(500, error);
   })
 
   console.log("test");
@@ -38,8 +38,6 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
-      ctx.body = "";
-      return;
     } else {
       console.log("no user exists: create new");
       const user = new User({
@@ -51,8 +49,6 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
-      ctx.body = "";
-      return;
     }
   } catch (e) {
     console.log("error on login: " + e.toString());
