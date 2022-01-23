@@ -3,6 +3,6 @@ import * as authCtrl from './auth.ctrl';
 
 const auth = new Router();
 
-auth.post('/login', authCtrl.login);
+auth.get('/login', authCtrl.login);
 
 export default auth;
