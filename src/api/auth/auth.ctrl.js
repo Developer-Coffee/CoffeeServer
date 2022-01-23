@@ -32,6 +32,7 @@ export const login = async ctx => {
   try {
     const exists = await User.findByKakaoUid(kakaoUid);
     if (exists) {
+      console.log("user exists: make jwt");
       const login_token = exists.generateToken();
       ctx.cookies.set('login_token', login_token, {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
