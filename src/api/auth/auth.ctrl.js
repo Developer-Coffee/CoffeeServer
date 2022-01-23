@@ -38,6 +38,7 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
+      ctx.body = exists.serialize();
     } else {
       console.log("no user exists: create new");
       const user = new User({
@@ -49,6 +50,7 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
+      ctx.body = user.serialize();
     }
   } catch (e) {
     console.log("error on login: " + e.toString());
