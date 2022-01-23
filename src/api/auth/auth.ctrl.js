@@ -14,7 +14,7 @@ export const login = async ctx => {
     },
     method: 'get'
   }).then(response => {
-    console.log("response: " + response.data.id + " " + response.data.app_id);
+    console.log("response: " + response.toString());
   })
 
   ctx.body = "gotit!";
