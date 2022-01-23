@@ -28,6 +28,7 @@ export const login = async ctx => {
     return;
   })
 
+  console.log("test");
   try {
     const exists = await User.findByKakaoUid(kakaoUid);
     if (exists) {
