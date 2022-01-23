@@ -20,7 +20,7 @@ UserSchema.methods.generateToken = function () {
   const token = jwt.sign(
     //첫 번쨰 파라미터에는 토큰 안에 집어넣고 싶은 데이터를 넣는다.
     {
-      _id: this.id,
+      _id: this._id,
       kakaoUid: this.kakaoUid,
     },
     process.env.JWT_SECRET, //두 번째 파라미터는 JWT 암호

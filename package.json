@@ -6,6 +6,7 @@
   "author": "Eunho.J <jho6394@hanyang.ac.kr>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^14.2.0",
     "eslint-config-prettier": "^8.3.0",
