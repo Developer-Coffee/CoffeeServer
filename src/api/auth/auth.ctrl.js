@@ -7,14 +7,14 @@ export const login = async ctx => {
   console.log(access_token);
 
   await axios({
-    url: "https://kapi.kakao.com/v1/user/access_token_info",
+    url: "https://kapi.kakao.com/v1/user/me",
     headers: {
       'Authorization': `Bearer ${access_token}`,
       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
     },
     method: 'GET'
   }).then(response => {
-    console.log(response);
+    console.log(response.data);
   })
 
   ctx.body = "gotit!";
