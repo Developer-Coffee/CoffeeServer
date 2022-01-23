@@ -4,9 +4,10 @@ import jwt from 'jsonwebtoken';
 
 const {Schema} = mongoose;
 const UserSchema = new Schema({
-  kakaoUid: {type: String, required: true},
+  kakaoUid: {type: Number, required: true},
   kakaoNickname: {type: String, required: true},
-  phone: {type: String, required: true}
+  kakaoProfileImg: {type: String, required: true},
+  kakaoThumbnailImg: {type: String, required: true}
 });
 
 
@@ -30,6 +31,11 @@ UserSchema.methods.generateToken = function () {
   );
   return token;
 }
+
+
+UserSchema.statics.findByKakaoUid = function(kakaoUid) {
+  return this.findOne({kakaoUid});
+};
 
 const User = mongoose.model('User', UserSchema);
 export default User;
