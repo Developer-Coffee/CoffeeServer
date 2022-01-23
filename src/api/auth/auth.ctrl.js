@@ -16,9 +16,9 @@ export const login = async ctx => {
   }).then(response => {
     console.log(response.data);
     kakaoUid = response.data.id;
-    kakaoNickname = response.data.profile.nickname;
-    kakaoProfileImg = response.data.profile.profile_image_url;
-    kakaoThumbnailImg = response.data.profile.thumbnail_image_url;
+    kakaoNickname = response.data.kakao_account.profile.nickname;
+    kakaoProfileImg = response.data.kakao_account.profile.profile_image_url;
+    kakaoThumbnailImg = response.data.kakao_account.profile.thumbnail_image_url;
   }).catch(error => {
     console.log(error.response);
     return;
