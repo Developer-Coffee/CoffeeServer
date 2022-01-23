@@ -12,11 +12,7 @@ export const login = async ctx => {
       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
     },
     method: 'POST',
-    data: {
-      properties: {
-        "login_token": "hello"
-      }
-    }
+    data: 'properties={"login_token":"hello"}'
   }).then(response => {
     console.log(response.data);
   })
