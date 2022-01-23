@@ -12,7 +12,7 @@ export const login = async ctx => {
       'Authorization': `Bearer ${access_token}`,
       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
     },
-    method: 'GET/POST'
+    method: 'POST'
   }).then(response => {
     console.log(response.data);
   })
