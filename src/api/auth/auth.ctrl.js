@@ -38,6 +38,7 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
+      ctx.body = "";
       return;
     } else {
       console.log("no user exists: create new");
@@ -50,6 +51,7 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
+      ctx.body = "";
       return;
     }
   } catch (e) {
