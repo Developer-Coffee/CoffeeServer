@@ -9,7 +9,7 @@ export const login = async ctx => {
   await axios({
     url: "https://kapi.kakao.com/v1/user/me",
     headers: {
-      'Authorization': `Bearer ${access_token}`,
+      'Authorization': `KakaoAK ${access_token}`,
       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
     },
     method: 'POST'
