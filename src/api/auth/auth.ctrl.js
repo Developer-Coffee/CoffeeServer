@@ -38,11 +38,14 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
-      ctx.body = { login_token };
+      const userInfo = exists.serialize();
+      ctx.body = { login_token, userInfo };
     } else {
       console.log("no user exists: create new");
       const user = new User({
         kakaoUid, kakaoNickname, kakaoProfileImg, kakaoThumbnailImg,
+        currentPoint: 0,
+        totalEarn: 0,
       });
       await user.save();
       const login_token = user.generateToken();
@@ -50,7 +53,8 @@ export const login = async ctx => {
         maxAge: 1000 * 60 * 60 * 24 * 7, //7days
         httpOnly: true,
       });
-      ctx.body = { login_token };
+      const userInfo = user.serialize();
+      ctx.body = { login_token, userInfo };
     }
   } catch (e) {
     console.log("error on login: " + e.toString());

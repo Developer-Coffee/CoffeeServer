@@ -7,12 +7,15 @@ const UserSchema = new Schema({
   kakaoUid: {type: Number, required: true},
   kakaoNickname: {type: String, required: true},
   kakaoProfileImg: {type: String, required: true},
-  kakaoThumbnailImg: {type: String, required: true}
+  kakaoThumbnailImg: {type: String, required: true},
+  currentPoint: {type: Number, required: true},
+  totalEarn: {type: Number, required: true}
 });
 
 
 UserSchema.methods.serialize = function () {
   const data = this.toJSON();
+  delete data.kakaoUid;
   return data;
 };
 
