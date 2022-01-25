@@ -57,6 +57,14 @@ export const addOrder = async ctx => {
     });
     await order.save();
 
+    await Board.updateOne(
+      {_id: board},
+      {
+        $push: {
+          orderList: order._id
+        },
+      });
+
     ctx.body = {order, totalPrice};
   } catch (e) {
     ctx.throw(500,e);
