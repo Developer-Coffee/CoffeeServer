@@ -23,7 +23,9 @@ MenuItemSchema.methods.serialize = function() {
 
 
 //statics
-
+MenuItemSchema.statics.findByShopId = function(shop) {
+  return this.find({shop});
+}
 
 
 const MenuItem = mongoose.model('MenuItem', MenuItemSchema);

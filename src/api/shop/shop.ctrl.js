@@ -53,6 +53,7 @@ export const menu = async ctx => {
     return;
   }
 
+  ctx.body = await MenuItem.findByShopId(shop);
 
 }
 
