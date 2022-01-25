@@ -35,6 +35,9 @@ app.use(router.routes()).use(router.allowedMethods());
 io.attach(app);
 
 io.on('connect', (ctx, data) => {
+  console.log('client connection', data);
+});
+io.on('message', (ctx, data) => {
   console.log('client sent data to message endpoint', data);
 });
 
