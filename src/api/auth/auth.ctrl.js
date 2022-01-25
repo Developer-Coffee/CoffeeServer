@@ -1,4 +1,3 @@
-import Joi from 'joi';
 import User from '../../models/user';
 import axios from 'axios';
 
