@@ -10,8 +10,8 @@ export const list = async ctx => {
 
     let menuCount = 0;
     const orderList = board.orderList;
-    for (const index in orderList) {
-      menuCount += orderList[index].count;
+    for (const order of orderList) {
+      menuCount += order.count;
     }
 
     const temp = {
