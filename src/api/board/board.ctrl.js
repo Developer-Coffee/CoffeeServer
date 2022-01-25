@@ -1,6 +1,7 @@
 import Board from '../../models/board';
 import Order from '../../models/order';
 import Joi from 'joi';
+import Shop from '../shop';
 
 export const addOrder = async ctx => {
 
@@ -8,7 +9,7 @@ export const addOrder = async ctx => {
 
 
 export const list = async ctx => {
-  const boards = await Board.find()
+  const boards = await Board.find().populate('shop')
     // .populate("orderList");
   //TODO: order 구현 후 populate
   let result = [];
@@ -87,6 +88,14 @@ export const create = async ctx => {
     shop,
     destination,
   } = ctx.request.body;
+
+  const shopExists = await Shop.findById(shop);
+  if (!shop) {
+    ctx.status = 400;
+    ctx.body = "Bad request! No shop match"
+    return;
+  }
+
   try {
     const board = new Board({
       shop, destination,

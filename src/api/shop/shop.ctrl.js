@@ -111,12 +111,12 @@ export const addMenu = async ctx => {
     await menuItem.save()
 
     await Shop.updateOne(
-    {_id: shop},
-    {
-      $push: {
-        menuList: menuItem._id
-      },
-    });
+      {_id: shop},
+      {
+        $push: {
+          menuList: menuItem._id
+        },
+      });
 
     ctx.body = menuItem.populate("shop");
 
