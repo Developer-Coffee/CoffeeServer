@@ -39,6 +39,20 @@ export const create = async ctx => {
 }
 
 export const menu = async ctx => {
+  const {shopId} = ctx.query;
+  if (!shopId) {
+    ctx.status = 400;
+    ctx.body = "Bad Request! Check Query"
+    return;
+  }
+
+  const shop = await Shop.findById(shopId);
+  if (!shop) {
+    ctx.status = 400;
+    ctx.body = "Bad Request! No Shop match"
+    return;
+  }
+
 
 }
 
@@ -95,7 +109,15 @@ export const addMenu = async ctx => {
       name, optionCategories, basicPrice, shop, menuImgUrl,
     });
     await menuItem.save()
-    ctx.body = menuItem.serialize();
+
+    ctx.body = await Shop.updateOne(
+      {_id: shop},
+      {
+        $push: {
+          menuList: menuItem._id
+        },
+      });
+
     //TODO
   } catch (e) {
     ctx.throw(500, e);
