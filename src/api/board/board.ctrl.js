@@ -1,7 +1,7 @@
 import Board from '../../models/board';
 import Order from '../../models/order';
 import Joi from 'joi';
-import Shop from '../shop';
+import Shop from '../../models/shop';
 
 export const addOrder = async ctx => {
 
