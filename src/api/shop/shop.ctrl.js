@@ -126,7 +126,7 @@ export const addMenu = async ctx => {
 
 export const list = async ctx => {
   try {
-    ctx.body = await Shop.find();
+    ctx.body = await Shop.find().populate("menuList");
   } catch (e) {
     ctx.throw(500, e);
   }
