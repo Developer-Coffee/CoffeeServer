@@ -2,9 +2,65 @@ import Board from '../../models/board';
 import Order from '../../models/order';
 import Joi from 'joi';
 import Shop from '../../models/shop';
+import MenuItem from '../../models/menuItem';
 
 export const addOrder = async ctx => {
+  const schema = Joi.object({
+    menuItem: Joi.string().required(),
+    selectedOptions: Joi.array().items({
+      categoryName: Joi.string().required(),
+      optionName: Joi.string().required(),
+    }).required(),
+    count: Joi.number().required(),
+    board: Joi.string().required(),
+  });
 
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    ctx.status = 400;
+    ctx.body = result.error;
+    return;
+  }
+
+  const {menuItem, selectedOptions, count, board} = ctx.request.body;
+
+  try {
+    const menuExists = await MenuItem.findById(menuItem);
+    if (!menuExists) {
+      ctx.status = 400;
+      ctx.body = "Bad Request! No menu match"
+      return;
+    }
+
+    const boardExists = await Board.findById(board);
+    if (!boardExists) {
+      ctx.status = 400;
+      ctx.body = "Bad Request! No board match"
+      return;
+    }
+
+    let totalPrice = menuExists.basicPrice;
+    for (const selectedOption of selectedOptions) {
+      const price = menuExists.getOptionPrice(selectedOption.categoryName, selectedOption.optionName);
+      if (price === -1) {
+        ctx.status = 400;
+        ctx.body = "Bad Request! no option category/option match";
+        return;
+      }
+      totalPrice += price;
+    }
+    totalPrice *= count;
+
+    const order = new Order({
+      user: ctx.state.user._id,
+      menuItem, selectedOptions, count, board
+    });
+    await order.save();
+
+    ctx.body = {order, totalPrice};
+  } catch (e) {
+    ctx.throw(500,e);
+  }
 }
 
 

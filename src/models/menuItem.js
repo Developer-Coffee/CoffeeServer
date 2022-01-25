@@ -21,6 +21,18 @@ MenuItemSchema.methods.serialize = function() {
   return data;
 }
 
+MenuItemSchema.methods.getOptionPrice = function(categoryName, optionName) {
+  for (const category of this.optionCategories) {
+    if (category.categoryName === categoryName) {
+      for (const option of category.options) {
+        if (option.optionName === optionName)
+          return option.optionPrice;
+      }
+    }
+  }
+  return -1;
+}
+
 
 //statics
 MenuItemSchema.statics.findByShopId = function(shop) {
