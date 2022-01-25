@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const {Schema} = mongoose;
@@ -18,7 +17,6 @@ UserSchema.methods.serialize = function () {
   delete data.kakaoUid;
   return data;
 };
-
 
 UserSchema.methods.generateToken = function () {
   const token = jwt.sign(
