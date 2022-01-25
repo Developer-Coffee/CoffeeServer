@@ -89,14 +89,13 @@ export const create = async ctx => {
     destination,
   } = ctx.request.body;
 
-  const shopExists = await Shop.findById(shop);
-  if (!shop) {
-    ctx.status = 400;
-    ctx.body = "Bad request! No shop match"
-    return;
-  }
-
   try {
+    const shopExists = await Shop.findById(shop);
+    if (!shop) {
+      ctx.status = 400;
+      ctx.body = "Bad request! No shop match"
+      return;
+    }
     const board = new Board({
       shop, destination,
       generatedAt: new Date(),
