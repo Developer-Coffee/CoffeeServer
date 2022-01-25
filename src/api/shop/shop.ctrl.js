@@ -119,7 +119,7 @@ export const addMenu = async ctx => {
         },
       });
 
-    ctx.body = menuItem.populate("shop");
+    ctx.body = menuItem;
 
   } catch (e) {
     ctx.throw(500, e);
