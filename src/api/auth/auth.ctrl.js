@@ -57,6 +57,7 @@ export const login = async ctx => {
     }
   } catch (e) {
     console.log("error on login: " + e.toString());
+    ctx.body = {success: false};
     ctx.throw(500, e);
   }
 }
