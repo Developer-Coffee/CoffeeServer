@@ -6,7 +6,7 @@ export const list = async ctx => {
   const boards = await Board.find()
     // .populate("orderList");
   let result = [];
-  for (const board in boards) {
+  for (const board of boards) {
 
     let menuCount = 0;
     const orderList = board.orderList;
