@@ -11,12 +11,12 @@ export const orders = async ctx => {
 }
 
 export const create = async ctx => {
-  const { user } = ctx.state;
-  if (!user) {
-    // 로그인 상태 아님
-    ctx.status = 401;
-    return;
-  }
+  // const { user } = ctx.state;
+  // if (!user) {
+  //   // 로그인 상태 아님
+  //   ctx.status = 401;
+  //   return;
+  // }
 
   console.log('create Board');
   const schema = Joi.object({
