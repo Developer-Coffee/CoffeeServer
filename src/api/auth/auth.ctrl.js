@@ -53,7 +53,7 @@ export const login = async ctx => {
         httpOnly: true,
       });
       const userInfo = user.serialize();
-      ctx.body = { login_token, userInfo };
+      ctx.body = { login_token, userInfo, success:true };
     }
   } catch (e) {
     console.log("error on login: " + e.toString());

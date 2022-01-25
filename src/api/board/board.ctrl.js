@@ -10,8 +10,7 @@ export const addOrder = async ctx => {
 
 export const list = async ctx => {
   const boards = await Board.find().populate('shop')
-    // .populate("orderList");
-  //TODO: order 구현 후 populate
+    .populate("orderList");
   let result = [];
   for (const board of boards) {
 
@@ -31,7 +30,6 @@ export const list = async ctx => {
     result.push(temp);
   }
   ctx.body = result;
-
 }
 
 export const orders = async ctx => {
@@ -100,6 +98,7 @@ export const create = async ctx => {
       shop, destination,
       generatedAt: new Date(),
       state: "created",
+      orderList: [],
     });
     console.log(ctx.request.body);
 
