@@ -10,6 +10,7 @@ const BoardSchema = new Schema({
   arrival: {type: Schema.Types.Date, required: false},
   waitFor: {type: Schema.Types.Number, required: false},
   message: {type: Schema.Types.String, required: false},
+  state: {type: Schema.Types.String, required: true},
 });
 
 //methods

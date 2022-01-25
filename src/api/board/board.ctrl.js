@@ -7,6 +7,23 @@ export const list = async ctx => {
 }
 
 export const orders = async ctx => {
+  const {groupBy, boardId} = ctx.query;
+  if (!groupBy || !boardId) {
+    ctx.status = 400; //Bad request
+    return;
+  } else if (groupBy !== "menu" && groupBy !== "user") {
+    ctx.status = 400;
+    return;
+  } else {
+    const board = await Board.findById(boardId);
+    if (!board) {
+    ctx.status = 400;
+    return;
+    }
+
+    //TODO
+
+  }
 
 }
 
@@ -45,7 +62,9 @@ export const create = async ctx => {
   } = ctx.request.body;
   try {
     const board = new Board({
-      shop, destination, generatedAt: new Date(),
+      shop, destination,
+      generatedAt: new Date(),
+      state: "created",
     });
     console.log(ctx.request.body);
 
