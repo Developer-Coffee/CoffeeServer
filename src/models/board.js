@@ -13,7 +13,10 @@ const BoardSchema = new Schema({
 });
 
 //methods
-
+BoardSchema.methods.serialize = function() {
+  const data = this.toJSON();
+  return data;
+}
 
 //statics
 

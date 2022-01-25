@@ -44,12 +44,12 @@ export const create = async ctx => {
     shop,
     destination,
     generatedAt,
-    orders,
   } = ctx.request.body;
   try {
     const board = new Board({
       shop, destination, generatedAt
     });
+    console.log(ctx.request.body);
 
     await board.save();
 
