@@ -1,5 +1,10 @@
 import Board from '../../models/board';
+import Order from '../../models/order';
 import Joi from 'joi';
+
+export const addOrder = async ctx => {
+
+}
 
 
 export const list = async ctx => {
@@ -39,8 +44,8 @@ export const orders = async ctx => {
   } else {
     const board = await Board.findById(boardId);
     if (!board) {
-    ctx.status = 400;
-    return;
+      ctx.status = 400;
+      return;
     }
 
     //TODO: shop, order & menuItem 구현 후 추가 구현 필요

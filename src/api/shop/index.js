@@ -6,6 +6,6 @@ const shop = new Router();
 shop.get('/menu', shopCtrl.menu);
 shop.get('/list', shopCtrl.list);
 shop.post('/create', shopCtrl.create);
-shop.post('/addmenu', shopCtrl.addmenu);
+shop.post('/addMenu', shopCtrl.addMenu);
 
 export default shop;

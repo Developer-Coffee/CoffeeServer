@@ -67,9 +67,12 @@ export const logout = async ctx => {
 }
 
 export const info = async ctx => {
-  ctx.body = "info";
+  const {userId} = ctx.query;
+  const result = await User.findById(userId);
+  ctx.body = result.serialize();
 }
 
 export const pickup = async ctx => {
   ctx.body = "pickup";
+  //TODO: on Board delivery start
 }
