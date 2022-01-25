@@ -22,7 +22,6 @@ export const create = async ctx => {
   const schema = Joi.object({
     shop: Joi.string().required(),
     destination: Joi.string().required(),
-    generatedAt: Joi.date().required(),
     orders: [{
       menuName: Joi.string().required(),
       selectedOptions: [{
