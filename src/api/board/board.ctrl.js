@@ -77,6 +77,7 @@ export const list = async ctx => {
     }
 
     const temp = {
+      _id: board._id,
       shop: board.shop,
       destination: board.destination,
       menuCount,
