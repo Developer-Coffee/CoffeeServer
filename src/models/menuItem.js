@@ -12,6 +12,7 @@ const MenuItemSchema = new Schema({
   }],
   basicPrice: {type: Schema.Types.Number, required: true},
   shop: {type: Schema.Types.ObjectId, ref: 'Shop', required: true},
+  menuImgUrl: {type: Schema.Types.String, required: false},
 });
 
 //methods
