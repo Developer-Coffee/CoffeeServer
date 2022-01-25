@@ -43,11 +43,10 @@ export const create = async ctx => {
   const {
     shop,
     destination,
-    generatedAt,
   } = ctx.request.body;
   try {
     const board = new Board({
-      shop, destination, generatedAt
+      shop, destination, generatedAt: new Date(),
     });
     console.log(ctx.request.body);
 
