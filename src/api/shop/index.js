@@ -1,11 +1,11 @@
 import Router from 'koa-router';
 import * as shopCtrl from './shop.ctrl';
 
-const shop = new Router();
+const shopRouter = new Router();
 
-shop.get('/menu', shopCtrl.menu);
-shop.get('/list', shopCtrl.list);
-shop.post('/create', shopCtrl.create);
-shop.post('/addMenu', shopCtrl.addMenu);
+shopRouter.get('/menu', shopCtrl.menu);
+shopRouter.get('/list', shopCtrl.list);
+shopRouter.post('/create', shopCtrl.create);
+shopRouter.post('/addMenu', shopCtrl.addMenu);
 
-export default shop;
+export default shopRouter;
