@@ -106,14 +106,12 @@ export const orders = async ctx => {
     ctx.status = 400;
     return;
   } else {
-    const board = await Board.findById(boardId);
+    const board = await Board.findById(boardId).populate("orderList");
     if (!board) {
       ctx.status = 400;
       return;
     }
-
-    //TODO: shop, order & menuItem 구현 후 추가 구현 필요
-
+    ctx.body = board.orderList;
   }
 
 }
