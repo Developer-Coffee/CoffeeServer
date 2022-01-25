@@ -5,6 +5,7 @@ import Joi from 'joi';
 export const list = async ctx => {
   const boards = await Board.find()
     // .populate("orderList");
+  //TODO: order 구현 후 populate
   let result = [];
   for (const board of boards) {
 

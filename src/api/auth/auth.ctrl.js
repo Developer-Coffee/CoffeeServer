@@ -65,3 +65,11 @@ export const logout = async ctx => {
   ctx.cookies.set("login_token");
   ctx.status = 204;
 }
+
+export const info = async ctx => {
+
+}
+
+export const pickup = async ctx => {
+
+}
