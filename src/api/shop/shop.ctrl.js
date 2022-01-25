@@ -54,7 +54,7 @@ export const addMenu = async ctx => {
         categoryName: Joi.string()
           .min(1)
           .max(10)
-          .pattern(/^[가-힣|a-z|A-Z|0-9]+$/)
+          .pattern(/^[가-힣|a-z|A-Z|0-9|\s|(|)]+$/)
           .required(),
         options: Joi.array().items({
           optionName: Joi.string()
