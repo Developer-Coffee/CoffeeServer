@@ -18,6 +18,7 @@ export const list = async ctx => {
       shop: board.shop,
       destination: board.destination,
       menuCount,
+      state: board.state,
     }
 
     result.push(temp);
