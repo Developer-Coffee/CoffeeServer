@@ -24,6 +24,7 @@ export const login = async ctx => {
     console.log(kakaoThumbnailImg);
   }).catch(error => {
     console.log(error.response);
+    ctx.body = {success: false};
     ctx.throw(500, error);
   })
 
@@ -38,7 +39,7 @@ export const login = async ctx => {
         httpOnly: true,
       });
       const userInfo = exists.serialize();
-      ctx.body = { login_token, userInfo };
+      ctx.body = { login_token, userInfo, success: true };
     } else {
       console.log("no user exists: create new");
       const user = new User({
