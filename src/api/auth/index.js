@@ -4,7 +4,7 @@ import authMiddleware from '../../lib/authMiddleware';
 
 const auth = new Router();
 
-auth.use(authMiddleware);
+// auth.use(authMiddleware);
 auth.post('/login', authCtrl.login);
 auth.get('/logout', authCtrl.logout);
 auth.get('/info', authCtrl.info);
