@@ -3,7 +3,26 @@ import Joi from 'joi';
 
 
 export const list = async ctx => {
-  ctx.body = await Board.find();
+  const boards = await Board.find().populate("orderList");
+  let result = [];
+  for (const board in boards) {
+
+    let menuCount = 0;
+    const orderList = board.orderList;
+    for (const order of orderList) {
+      menuCount += order.count;
+    }
+
+    const temp = {
+      shop: board.shop,
+      destination: board.destination,
+      menuCount,
+    }
+
+    result.push(temp);
+  }
+  ctx.body = result;
+
 }
 
 export const orders = async ctx => {
@@ -21,7 +40,7 @@ export const orders = async ctx => {
     return;
     }
 
-    //TODO
+    //TODO: shop, order & menuItem 구현 후 추가 구현 필요
 
   }
 
@@ -74,17 +93,4 @@ export const create = async ctx => {
   } catch (e) {
     ctx.throw(500, e);
   }
-
-
-}
-
-export const state = async ctx => {
-  const { user } = ctx.state;
-  if (!user) {
-    // 로그인 상태 아님
-    ctx.status = 401;
-    return;
-  }
-
-
 }

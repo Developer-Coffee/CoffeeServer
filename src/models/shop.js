@@ -9,7 +9,10 @@ const ShopSchema = new Schema({
 
 
 //methods
-
+ShopSchema.methods.serialize = function() {
+  const data = this.toJSON();
+  return data;
+}
 
 
 //statics

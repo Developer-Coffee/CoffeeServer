@@ -15,7 +15,10 @@ const MenuItemSchema = new Schema({
 });
 
 //methods
-
+MenuItemSchema.methods.serialize = function() {
+  const data = this.toJSON();
+  return data;
+}
 
 
 //statics
