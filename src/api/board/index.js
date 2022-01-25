@@ -1,11 +1,11 @@
 import Router from 'koa-router';
 import * as boardCtrl from './board.ctrl';
 
-const board = new Router();
+const boardRouter = new Router();
 
-board.post('/addOrder', boardCtrl.addOrder);
-board.get('/list', boardCtrl.list);
-board.get('/orders', boardCtrl.orders);
-board.post('/create', boardCtrl.create);
+boardRouter.post('/addOrder', boardCtrl.addOrder);
+boardRouter.get('/list', boardCtrl.list);
+boardRouter.get('/orders', boardCtrl.orders);
+boardRouter.post('/create', boardCtrl.create);
 
-export default board;
+export default boardRouter;
