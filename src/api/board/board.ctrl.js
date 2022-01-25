@@ -3,7 +3,8 @@ import Joi from 'joi';
 
 
 export const list = async ctx => {
-  const boards = await Board.find().populate("orderList");
+  const boards = await Board.find()
+    // .populate("orderList");
   let result = [];
   for (const board in boards) {
 
