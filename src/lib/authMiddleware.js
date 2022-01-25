@@ -1,7 +1,7 @@
 
 
 const authMiddleware = async (ctx, next) => {
-  const { user } = ctx.state;
+  const { user } = ctx.query;
   if (!user) {
     console.log("no auth with token!");
     ctx.status = 401; //Unauthorized

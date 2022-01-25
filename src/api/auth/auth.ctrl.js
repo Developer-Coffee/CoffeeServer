@@ -67,9 +67,9 @@ export const logout = async ctx => {
 }
 
 export const info = async ctx => {
-
+  ctx.body = "info";
 }
 
 export const pickup = async ctx => {
-
+  ctx.body = "pickup";
 }
