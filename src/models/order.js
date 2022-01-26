@@ -85,9 +85,17 @@ OrderSchema.statics.getGroupByMenu = async function(board) {
     }
     for (const item of result) {
       if (item.combinedName === combinedName) {
+        for (const orderId of item.orderIds){
+          if (orderId.user._id.equals(order.user._id)){
+            found = true;
+            orderId.count += order.count;
+          }
+        }
+        if (!found) {
+          item.orderIds.push({user: order.user, count: order.count});
+          item.count = item.count + order.count;
+        }
         found = true;
-        item.orderIds.push(order.user);
-        item.count = item.count + order.count;
       }
     }
     if (!found) {
