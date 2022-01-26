@@ -93,8 +93,8 @@ OrderSchema.statics.getGroupByMenu = async function(board) {
         }
         if (!found) {
           item.orderIds.push({user: order.user, count: order.count});
-          item.count = item.count + order.count;
         }
+        item.count = item.count + order.count;
         found = true;
       }
     }
@@ -103,7 +103,7 @@ OrderSchema.statics.getGroupByMenu = async function(board) {
         combinedName,
         count: order.count,
         pricePerOne: order.getPricePerOne(),
-        orderIds: [order.user],
+        orderIds: [{user: order.user, count: order.count}],
       });
     }
   }
