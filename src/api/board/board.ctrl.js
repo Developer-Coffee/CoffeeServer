@@ -7,14 +7,15 @@ import MenuItem from '../../models/menuItem';
 
 export const state = async ctx => {
   const {boardId} = ctx.query;
-  const board = await Board.findById(boardId);
+  const board = await Board.findById(boardId)
+    .populate('shop',{_id:1, name:1, address:1})
+    .populate('orderList');
   if (!board) {
     ctx.status = 400;
     ctx.body = "Bad Request! No board match"
     return;
   }
 
-  ctx.body = board.populate('shop',{_id:1, name:1, address:1}).populate('orderList');
   let menuCount = 0;
   const orderList = board.orderList;
   for (const order of orderList) {
