@@ -106,12 +106,15 @@ export const orders = async ctx => {
     ctx.status = 400;
     return;
   } else {
-    const board = await Board.findById(boardId).populate("orderList");
+    const board = await Board.findById(boardId);
     if (!board) {
       ctx.status = 400;
       return;
     }
-    ctx.body = board.orderList;
+
+    if (groupBy === "menu") ctx.body = await Order.getGroupByMenu(boardId);
+    else if (groupBy === "user") ctx.body = await Order.getGroupByUser(boardId);
+
   }
 
 }

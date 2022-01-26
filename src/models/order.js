@@ -19,17 +19,96 @@ OrderSchema.methods.serialize = function() {
   return data;
 }
 
-OrderSchema.methods.getTotalPrice = async function() {
+OrderSchema.methods.getPricePerOne = async function() {
   const menu = await MenuItem.findById(this.menuItem);
-  let totalPrice = menu.basicPrice;
+  let pricePerOne = menu.basicPrice;
   for (const selectedOption of this.selectedOptions) {
-    totalPrice += menu.getOptionPrice(selectedOption.categoryName, selectedOption.optionName);
+    pricePerOne += menu.getOptionPrice(selectedOption.categoryName, selectedOption.optionName);
   }
-  return totalPrice;
+  return pricePerOne;
 }
 
 //statics
+OrderSchema.statics.getGroupByUser = async function(board) {
 
+  const orders = await Order.find({board}).populate('menuItem');
+  let result = [];
+  for (const order of orders) {
+    let found = false;
+    let combinedName = order.menuItem.name;
+    for (const option of order.menuItem.selectedOptions) {
+      combinedName = combinedName + "-" + option.optionName;
+    }
+    for (const item of result) {
+      if (item.user === order.user) {
+        found = true;
+
+        item.orders.push({
+          combinedName,
+          count: order.count,
+          pricePerOne: await order.getPricePerOne(),
+        });
+      }
+    }
+    if (!found) {
+      result.push({
+        user: order.user,
+        orders: [{
+          combinedName,
+          count: order.count,
+          pricePerOne: await order.getPricePerOne(),
+        }]
+      });
+    }
+  }
+  return result;
+  /*
+  {
+    user: user._id
+    orders: [{
+      combinedName: "name-option1-option2",
+      count,
+      pricePerOne
+    }, ...]
+  }
+  */
+}
+
+OrderSchema.statics.getGroupByMenu = async function(board) {
+  const orders = await Order.find({board}).populate('menuItem');
+  let result = [];
+  for (const order of orders) {
+    let found = false;
+    let combinedName = order.menuItem.name;
+    for (const option of order.menuItem.selectedOptions) {
+      combinedName = combinedName + "-" + option.optionName;
+    }
+    for (const item of result) {
+      if (item.combinedName === combinedName) {
+        found = true;
+        item.orderIds.push(order.user);
+        item.count = item.count + order.count;
+      }
+    }
+    if (!found) {
+      result.push({
+        combinedName,
+        count: order.count,
+        pricePerOne: order.getPricePerOne(),
+        orderIds: [order.user],
+      });
+    }
+  }
+  return result;
+  /*
+    {
+      combinedName: "name-option1-option2",
+      count,
+      pricePerOne,
+      orderIds: []
+    }
+     */
+}
 
 
 const Order = mongoose.model('Order', OrderSchema);
