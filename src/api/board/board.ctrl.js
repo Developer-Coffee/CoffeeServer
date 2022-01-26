@@ -4,6 +4,19 @@ import Joi from 'joi';
 import Shop from '../../models/shop';
 import MenuItem from '../../models/menuItem';
 
+
+export const state = async ctx => {
+  const {boardId} = ctx.query;
+  const board = await Board.findById(boardId);
+  if (!board) {
+    ctx.status = 400;
+    ctx.body = "Bad Request! No board match"
+    return;
+  }
+
+  ctx.body = board.populate('shop',{_id:1, name:1, address:1})
+}
+
 export const addOrder = async ctx => {
   const schema = Joi.object({
     menuItem: Joi.string().required(),
