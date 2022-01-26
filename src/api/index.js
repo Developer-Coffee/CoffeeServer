@@ -3,6 +3,7 @@ import auth from './auth';
 import boardRouter from './board';
 import delivery from './delivery';
 import shopRouter from './shop';
+import authMiddleware from '../lib/authMiddleware';
 
 const api = new Router();
 
