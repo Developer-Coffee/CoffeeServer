@@ -36,7 +36,7 @@ OrderSchema.statics.getGroupByUser = async function(board) {
   for (const order of orders) {
     let found = false;
     let combinedName = order.menuItem.name;
-    for (const option of order.menuItem.selectedOptions) {
+    for (const option of order.selectedOptions) {
       combinedName = combinedName + "-" + option.optionName;
     }
     for (const item of result) {
@@ -80,7 +80,7 @@ OrderSchema.statics.getGroupByMenu = async function(board) {
   for (const order of orders) {
     let found = false;
     let combinedName = order.menuItem.name;
-    for (const option of order.menuItem.selectedOptions) {
+    for (const option of order.selectedOptions) {
       combinedName = combinedName + "-" + option.optionName;
     }
     for (const item of result) {
