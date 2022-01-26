@@ -102,7 +102,7 @@ OrderSchema.statics.getGroupByMenu = async function(board) {
       result.push({
         combinedName,
         count: order.count,
-        pricePerOne: order.getPricePerOne(),
+        pricePerOne: await order.getPricePerOne(),
         orderIds: [{user: order.user, count: order.count}],
       });
     }
