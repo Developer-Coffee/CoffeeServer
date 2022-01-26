@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import User from './user';
 const {Schema} = mongoose;
 
 const BoardSchema = new Schema({
@@ -10,6 +11,8 @@ const BoardSchema = new Schema({
   arrival: {type: Schema.Types.Date, required: false},
   waitFor: {type: Schema.Types.Number, required: false},
   message: {type: Schema.Types.String, required: false},
+  pickLocation: {type: Schema.Types.String, requierd: false},
+  deliverUser: {type: Schema.Types.ObjectId, ref: 'User', required: false},
   state: {type: Schema.Types.String, required: true},
 });
 
