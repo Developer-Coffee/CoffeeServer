@@ -84,7 +84,7 @@ OrderSchema.statics.getGroupByMenu = async function(board) {
       combinedName = combinedName + "-" + option.optionName;
     }
     for (const item of result) {
-      if (item.combinedName.equals(combinedName)) {
+      if (item.combinedName === combinedName) {
         found = true;
         item.orderIds.push(order.user);
         item.count = item.count + order.count;
