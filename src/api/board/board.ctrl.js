@@ -73,7 +73,7 @@ export const addOrder = async ctx => {
 
 
 export const list = async ctx => {
-  const boards = await Board.find().populate('shop')
+  const boards = await Board.find().populate('shop', {_id:1, name:1, address:1})
     .populate("orderList");
   let result = [];
   for (const board of boards) {
