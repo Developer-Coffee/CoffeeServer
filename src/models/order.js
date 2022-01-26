@@ -40,7 +40,7 @@ OrderSchema.statics.getGroupByUser = async function(board) {
       combinedName = combinedName + "-" + option.optionName;
     }
     for (const item of result) {
-      if (item.user === order.user) {
+      if (item.user._id === order.user._id) {
         found = true;
 
         item.orders.push({
