@@ -14,7 +14,20 @@ export const state = async ctx => {
     return;
   }
 
-  ctx.body = board.populate('shop',{_id:1, name:1, address:1})
+  ctx.body = board.populate('shop',{_id:1, name:1, address:1}).populate('orderList');
+  let menuCount = 0;
+  const orderList = board.orderList;
+  for (const order of orderList) {
+    menuCount += order.count;
+  }
+
+  ctx.body =  {
+    _id: board._id,
+    shop: board.shop,
+    destination: board.destination,
+    menuCount,
+    state: board.state,
+  }
 }
 
 export const addOrder = async ctx => {
